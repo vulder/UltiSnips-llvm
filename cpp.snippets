@@ -1,0 +1,62 @@
+priority -48
+
+snippet main "main() (main)"
+int main(/* int argc, char *argv[] */) {
+	${VISUAL}$0
+	return 0;
+}
+endsnippet
+
+###########################################################################
+#                            LLVM Snippets                                #
+###########################################################################
+
+global !p
+def append_comment_ending():
+	end_token = "-*- C++ -*-===//"
+	top_line = snip.buffer[snip.snippet_start.line]
+	spaccer = max((80 - len(end_token) - len(top_line)), 0) * "-"
+	snip.buffer[snip.snippet_start.line] = top_line + spaccer + end_token
+endglobal
+
+post_jump "if snip.tabstop == 0: append_comment_ending()"
+snippet hcom "llvm header comment" b
+//===- $1.h - $2 
+//
+//                     The LLVM Compiler Infrastructure
+//
+// This file is distributed under the University of Illinois Open Source
+// License. See LICENSE.TXT for details.
+//
+//===----------------------------------------------------------------------===//
+//
+//  ${3:TODO:}
+//
+//===----------------------------------------------------------------------===//
+
+$0
+endsnippet
+
+snippet #ifndef "#ifndef ... #define ... #endif"
+#ifndef ${1/([A-Za-z0-9_]+).*/$1/}
+#define ${1:SYMBOL}
+#endif // $1
+endsnippet
+
+snippet ifndef "#ifndef ... #define ... #endif"
+#ifndef ${1/([A-Za-z0-9_]+).*/$1/}
+#define ${1:SYMBOL}
+#endif // $1
+endsnippet
+
+snippet ns "namespace .. (namespace)"
+namespace${1/.+/ /m}${1:`!p snip.rv = snip.basename or "name"`} {
+	${VISUAL}$0
+}${1/.+/ \/\/ /m}namespace $1
+endsnippet
+
+snippet sep "//===--- separator"
+//===----------------------------------------------------------------------===//
+// $1
+
+endsnippet
