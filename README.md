@@ -1,5 +1,7 @@
 # UltiSnips for LLVM
 
+# Installation
+
 Adaptations to the c/cpp snippets to target the llvm style guide.
 
 ```vim
@@ -10,3 +12,11 @@ Adaptations to the c/cpp snippets to target the llvm style guide.
   cd ~/.vim
   git clone https://github.com/vulder/UltiSnips-llvm.git UltiSnips
 ```
+
+## Extra commands
+|Command | Description            |
+|--------|------------------------|
+| hcom   | create header comment
+| ifndef | adapted style
+| ns     | adapted style
+| sep    | create llvm separator
