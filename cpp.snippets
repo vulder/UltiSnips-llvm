@@ -60,8 +60,17 @@ namespace${1/.+/ /m}${1:`!p snip.rv = snip.basename or "name"`} {
 }${1/.+/ \/\/ /m}namespace $1
 endsnippet
 
+global !p
+def format_sep():
+	end_token = "===//"
+	spaccer = "-"
+	start_token = snip.buffer[snip.snippet_start.line]
+	snip.buffer[snip.snippet_start.line] = expand_line_spaccer(start_token, spaccer, end_token)
+endglobal
+
+post_jump "if snip.tabstop == 0: format_sep()"
 snippet sep "//===--- separator"
-//===----------------------------------------------------------------------===//
+//===
 // $1
 
 endsnippet
