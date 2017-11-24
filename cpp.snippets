@@ -12,11 +12,16 @@ endsnippet
 ###########################################################################
 
 global !p
+def expand_line_spaccer(line, spaccer, end_token):
+	expanded_spaccer = max((80 - len(end_token) - len(line)), 0) * spaccer
+	return line + expanded_spaccer + end_token
+endglobal
+
+global !p
 def append_comment_ending():
 	end_token = "-*- C++ -*-===//"
 	top_line = snip.buffer[snip.snippet_start.line]
-	spaccer = max((80 - len(end_token) - len(top_line)), 0) * "-"
-	snip.buffer[snip.snippet_start.line] = top_line + spaccer + end_token
+	snip.buffer[snip.snippet_start.line] = expand_line_spaccer(top_line, "-", end_token)
 endglobal
 
 post_jump "if snip.tabstop == 0: append_comment_ending()"
