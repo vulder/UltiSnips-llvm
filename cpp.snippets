@@ -75,6 +75,29 @@ snippet sep "//===--- separator"
 
 endsnippet
 
+snippet bsep "Closed Block separator"
+	//===--------------------------------------------------===//
+	// $1
+	//===--------------------------------------------------===//
+endsnippet
+
+global !p
+def align_cl_name():
+	#class_name = snip.tabstops[1]#.current_text()
+	class_name = snip.tabstops[1].current_text
+	cl_name = class_name + " Class"
+	spaccer = max((80 - 2 - len(cl_name)) // 2, 0) * " "
+	snip.buffer[snip.snippet_start.line+1] = "//" + spaccer + cl_name
+endglobal
+
+post_jump "if snip.tabstop == 0: align_cl_name()"
+snippet cbl "Full Block"
+//===----------------------------------------------------------------------===//
+//                               $1 Class
+//===----------------------------------------------------------------------===//
+${VISUAL}$0
+endsnippet
+
 snippet dyn "dyn_cast"
 dyn_cast<${1:Type}>(${2:expr})
 endsnippet

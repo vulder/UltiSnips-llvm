@@ -17,8 +17,10 @@ Adaptations to the c/cpp snippets to target the llvm style guide.
 |Command   | Description            |
 |----------|------------------------|
 | hcom     | create header comment
+| cbl      | class block comment
+| sep      | create llvm separator
+| bsep     | block separator
 | ifndef   | adapted style
 | ns       | adapted style
-| sep      | create llvm separator
 | dyn/idy  | dyn_cast/if dyn_cast
 | isa/iis  | isa/if isa
